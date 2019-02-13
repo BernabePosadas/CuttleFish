@@ -1,0 +1,3 @@
+C:\Users\SU# BERNABE\Documents\Visual Studio 2012\Projects\CuttleFishv0.0.8\CuttleFish\CuttleFish\bin\Debug\CuttleFish.exe.config
+C:\Users\SU# BERNABE\Documents\Visual Studio 2012\Projects\CuttleFishv0.0.8\CuttleFish\CuttleFish\obj\Debug\CuttleFish.exe
+C:\Users\SU# BERNABE\Documents\Visual Studio 2012\Projects\CuttleFishv0.0.8\CuttleFish\CuttleFish\obj\Debug\CuttleFish.pdb
