@@ -200,12 +200,22 @@ namespace CuttleFish
         {
             Stopwatch time = new Stopwatch();
             bool formNotFilledUp = false;
+            bool metaCleanErrorFlag = false;
             ErrProvide.Clear();
             deleteAfterEmbeddingToolStripMenuItem.Enabled = false;
             if (removeMetadata)
             {
                 sReportLbl.Text = "Cleaning Video Cover......";
-                await vidreader.RemoveMetadata(vidPath.Text);
+                try
+                {
+                    await vidreader.RemoveMetadata(vidPath.Text);
+                }
+                catch(Exception ErrorMessage)
+                {
+                    MessageBox.Show(string.Format("Encountered an exception while cleaning existing metadata.\n{0} ", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    metaCleanErrorFlag = true;
+                }
+                sReportLbl.Text = "Ready";
             }
             if (txtPath.Text == "")
             {
@@ -217,7 +227,7 @@ namespace CuttleFish
                 ErrProvide.SetError(vidPath, "Select a Cover ");
                 formNotFilledUp = true;
             }
-            if (!formNotFilledUp)
+            if (!formNotFilledUp && !metaCleanErrorFlag)
             {
                 long gb2 = 1024 * 1024;
                 gb2 *= 1024 * 2;
@@ -435,9 +445,14 @@ namespace CuttleFish
                 }
 
             }
-            else
+            else if(formNotFilledUp)
             {
                 MessageBox.Show("Missing input found. Fill up the neccessary inputs", "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (metaCleanErrorFlag)
+            {
+                txtPath.Text = "";
+                vidPath.Text = "";
             }
             deleteAfterEmbeddingToolStripMenuItem.Enabled = true;
             sReportLbl.Text = "Ready";
