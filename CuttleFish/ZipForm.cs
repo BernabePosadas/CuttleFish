@@ -60,7 +60,7 @@ namespace CuttleFish
                  }
                  else
                   {
-                    MessageBox.Show("Error while adding file: " + Path.GetFileName(filename) + "\nfile already added in the list", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error while adding file: " + Path.GetFileName(filename) + "\nthe file was already in the list", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                   }
                 }
             }
@@ -90,6 +90,7 @@ namespace CuttleFish
         }
         private void compressFile_Click(object sender, EventArgs e)
         {
+            ZipStatusLbl.Text = "Compressing File";
             if (bg1.IsBusy != true)
             {
                 bg1.RunWorkerAsync();
@@ -125,6 +126,7 @@ namespace CuttleFish
 
         private void ZipForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            
             if (ZipStatusLbl.Text != "Ready")
             {
                 if (MessageBox.Show("Operation still ongoing. Are you Sure you want to stop?", "Cuttlefish", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
@@ -256,7 +258,7 @@ namespace CuttleFish
             }
             else if (e.Error != null)
             {
-                MessageBox.Show("Encountered an error while compressing the file \n" + e.Error, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Opps, Encountered an error when compressing file. Please check if the file selected is used by another program. \n\n" + e.Error, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {

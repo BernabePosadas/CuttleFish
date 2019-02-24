@@ -179,7 +179,16 @@ namespace CuttleFish
                     }
                 }
             }
-            readVid.Dispose();  
+            readVid.Dispose();
+            resetClasses();
+        }
+        private void resetClasses()
+        {
+            embeder = null;
+            extractor = null;
+            GC.Collect(0, GCCollectionMode.Forced);
+            GC.Collect(1, GCCollectionMode.Forced);
+            GC.Collect(2, GCCollectionMode.Forced);
         }
         public async Task ReadAndEmbedVideoStream(string path, List<byte[]> data, IProgress<long> reportEmbededData, long embedSize, byte[] format, byte[] keystream, byte repeatcount, bool isRGB16, byte[] passHash)
         {
@@ -306,6 +315,7 @@ namespace CuttleFish
                 }
             }
             readVid.Dispose();
+            resetClasses();
         }
         private byte[] processChunk(byte[] data)
         {
@@ -456,7 +466,7 @@ namespace CuttleFish
                 }
                   
             }
-            readVid.Dispose(); 
+            readVid.Dispose();
         }
         public long getExtracted()
         {

@@ -32,7 +32,7 @@ namespace CuttleFish
             }catch(Exception ErrorMessage)
             {
                 ExceptionEncountered = true;
-                MessageBox.Show(string.Format("Encountered an exception while reading file.\n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format("Opps, file access denied. Please check if file is in use by another program \n\n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public async Task ReadData(string path, byte[] keystream, byte keyrepeat, IProgress<int> sizeReport, IProgress<int> PerformStep)
@@ -83,7 +83,7 @@ namespace CuttleFish
             catch (Exception ErrorMessage)
             {
                 ExceptionEncountered = true;
-                MessageBox.Show(string.Format("Encountered an exception while reading file.\n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format("Opps, file access denied. Please check if file is in use by another program \n\n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public async Task ReadData(string path, byte[] keystream, byte keyrepeat, IProgress<int> sizeReport, IProgress<int> PerformStep, string password)
@@ -134,7 +134,7 @@ namespace CuttleFish
             catch (Exception ErrorMessage)
             {
                 ExceptionEncountered = true;
-                MessageBox.Show(string.Format("Encountered an exception while reading file.\n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format("Encountered an exception while reading file.\n\n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public byte[] getLinearKey()
@@ -189,7 +189,7 @@ namespace CuttleFish
             catch (Exception ErrorMessage)
             {
                 ExceptionEncountered = true;
-                MessageBox.Show(string.Format("Encountered an exception while reading file.\n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format("Opps, file access denied. Please check if file is in use by another program \n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public async Task ReadData(string path, byte[,] keystream, IProgress<int> sizeReport, IProgress<int> PerformStep, string password)
@@ -240,7 +240,7 @@ namespace CuttleFish
             catch (Exception ErrorMessage)
             {
                 ExceptionEncountered = true;
-                MessageBox.Show(string.Format("Encountered an exception while reading file.\n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format("Opps, file access denied. Please check if file is in use by another program \n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public async Task writeData(string path, long size, byte[] keystream, byte keyrepeat, IProgress<long> reportWroteData, List<byte[]> data)
@@ -285,7 +285,7 @@ namespace CuttleFish
             catch (Exception ErrorMessage)
             {
                 ExceptionEncountered = true;
-                MessageBox.Show(string.Format("Encountered an exception while writing file.\n{0} ", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format("Opps, file access denied. Please check if file is in use by another program \n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public async Task writeData(string path, long size, byte[] keystream, byte keyrepeat, IProgress<long> reportWroteData, List<byte[]> data, string password)
@@ -330,7 +330,7 @@ namespace CuttleFish
             catch (Exception ErrorMessage)
             {
                 ExceptionEncountered = true;
-                MessageBox.Show(string.Format("Encountered an exception while writing file.\n{0} ", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format("Opps, file access denied. Please check if file is in use by another program \n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public async Task writeData(string path, long size, byte[,] keystream, IProgress<long> reportWroteData, List<byte[]> data)
@@ -375,7 +375,7 @@ namespace CuttleFish
             catch (Exception ErrorMessage)
             {
                 ExceptionEncountered = true;
-                MessageBox.Show(string.Format("Encountered an exception while writing file.\n{0} ", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format("Opps, file access denied. Please check if file is in use by another program \n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public async Task writeData(string path, long size, byte[,] keystream, IProgress<long> reportWroteData, List<byte[]> data, string password)
@@ -420,7 +420,7 @@ namespace CuttleFish
             catch (Exception ErrorMessage)
             {
                 ExceptionEncountered = true;
-                MessageBox.Show(string.Format("Encountered an exception while writing file.\n{0} ", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format("Opps, file access denied. Please check if file is in use by another program \n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private byte[] decryptDataStream(byte[] data)

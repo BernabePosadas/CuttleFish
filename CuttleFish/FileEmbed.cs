@@ -29,6 +29,8 @@ namespace CuttleFish
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
+            long gb2 = 1024 * 1024;
+            gb2 *= 1024 * 2;
             if (multipleFileModeToolStripMenuItem.Checked)
             {
                 ZipForm zipFrm = new ZipForm();
@@ -45,6 +47,13 @@ namespace CuttleFish
                     lblSize.Text = displayFileSize(io.getSize());
                     if (io.ExceptionEncountered)
                     {
+                        lblFilename.Text = "";
+                        lblSize.Text = "";
+                        txtPath.Text = "";
+                    }
+                    else if (io.getSize() > gb2)
+                    {
+                        MessageBox.Show(string.Format("the file size of the selected file is more than 2GB({0:0,000} bytes). Please use a smaller payload file.", gb2), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         lblFilename.Text = "";
                         lblSize.Text = "";
                         txtPath.Text = "";
@@ -68,6 +77,13 @@ namespace CuttleFish
                     lblSize.Text = displayFileSize(io.getSize());
                     if (io.ExceptionEncountered)
                     {
+                        lblFilename.Text = "";
+                        lblSize.Text = "";
+                        txtPath.Text = "";
+                    }
+                    else if (io.getSize() > gb2)
+                    {
+                        MessageBox.Show(string.Format("the file size of the selected file is more than 2GB({0:0,000} bytes). Please use a smaller payload file.", gb2), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         lblFilename.Text = "";
                         lblSize.Text = "";
                         txtPath.Text = "";
@@ -212,7 +228,7 @@ namespace CuttleFish
                 }
                 catch(Exception ErrorMessage)
                 {
-                    MessageBox.Show(string.Format("Encountered an exception while cleaning existing metadata.\n{0} ", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(string.Format("Opps, Unable to access the video cover. Please check if the video cover file exist or not in use by another program \n\n{0} ", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     metaCleanErrorFlag = true;
                 }
                 sReportLbl.Text = "Ready";
@@ -229,13 +245,7 @@ namespace CuttleFish
             }
             if (!formNotFilledUp && !metaCleanErrorFlag)
             {
-                long gb2 = 1024 * 1024;
-                gb2 *= 1024 * 2;
-                if (io.getSize() > gb2)
-                {
-                    MessageBox.Show(string.Format("Cannot embed data, payload must not be greater than 2GB({0:0,000} bytes)", gb2), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else if (Supportedlbl.Text == "Yes")
+                if (Supportedlbl.Text == "Yes")
                 {
                     if (vidreader.getVideoStreamSize() >= (io.getSize() * 4))
                     {
@@ -268,7 +278,22 @@ namespace CuttleFish
                                     {
                                         await vidreader.ReadAndEmbedVideoStream(vidPath.Text, io.getData(), dataProgressIndicator3, io.getSize(), format, keystream, repeatcount, itsRGB16, hashedpass);
                                         time.Stop();
-                                        MessageBox.Show(string.Format("File Embeded Successfully!!\nTime Elapsed: {0}", time.Elapsed), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        TimeSpan span = time.Elapsed;
+                                        string ElapsedTime = "The Time Elapsed is ";
+                                        if (span.Hours > 0)
+                                        {
+                                            ElapsedTime += span.Hours + " hours ";
+                                        }
+                                        if (span.Minutes > 0)
+                                        {
+                                            ElapsedTime += span.Minutes + " minutes ";
+                                        }
+                                        if (span.Seconds > 0)
+                                        {
+                                            ElapsedTime += span.Seconds + " seconds ";
+                                        }
+                                        ElapsedTime += span.Milliseconds + " milliseconds";
+                                        MessageBox.Show(string.Format("File Embeded Successfully!!\n{0}", ElapsedTime), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                         if (deleteAfterEmbeddingToolStripMenuItem.Checked)
                                         {
                                             if (fileList.Count != 0)
@@ -284,10 +309,11 @@ namespace CuttleFish
                                                 File.Delete(txtPath.Text);
                                             }
                                         }
+                                        resetClasses();
                                     }
                                     catch (Exception ErrorMessage)
                                     {
-                                        MessageBox.Show(string.Format("Encountered an exception while embedding file.\n{0} ", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        MessageBox.Show(string.Format("Opps! We encountered an error while embedding. Please check if the payload file or video file exist and not used by another program and restart the operation. \n\n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
                                     txtPath.Text = "";
                                     vidPath.Text = "";
@@ -312,7 +338,22 @@ namespace CuttleFish
                                 {
                                     await vidreader.ReadAndEmbedVideoStream(vidPath.Text, io.getData(), dataProgressIndicator3, io.getSize(), format, keystream, repeatcount, itsRGB16);
                                     time.Stop();
-                                    MessageBox.Show(string.Format("File Embeded Successfully!!\nTime Elapsed: {0}", time.Elapsed), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    TimeSpan span = time.Elapsed;
+                                    string ElapsedTime = "The Time Elapsed is ";
+                                    if (span.Hours > 0)
+                                    {
+                                        ElapsedTime += span.Hours + " hours ";
+                                    }
+                                    if (span.Minutes > 0)
+                                    {
+                                        ElapsedTime += span.Minutes + " minutes ";
+                                    }
+                                    if (span.Seconds > 0)
+                                    {
+                                        ElapsedTime += span.Seconds + " seconds ";
+                                    }
+                                    ElapsedTime += span.Milliseconds + " milliseconds";
+                                    MessageBox.Show(string.Format("File Embeded Successfully!!\n{0}", ElapsedTime), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     if (deleteAfterEmbeddingToolStripMenuItem.Checked)
                                     {
                                         if (fileList.Count != 0)
@@ -328,11 +369,11 @@ namespace CuttleFish
                                             File.Delete(txtPath.Text);
                                         }
                                     }
-                                    
+                                    resetClasses();
                                 }
                                 catch (Exception ErrorMessage)
                                 {
-                                    MessageBox.Show(string.Format("Encountered an exception while embedding file.\n{0} ", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show(string.Format("Opps! We encountered an error while embedding. Please check if the payload file or video file exist and not used by another program and restart the operation. \n\n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                                 txtPath.Text = "";
                                 vidPath.Text = "";
@@ -364,7 +405,22 @@ namespace CuttleFish
                                     {
                                         await vidreader.ReadAndEmbedVideoStream(vidPath.Text, io.getData(), dataProgressIndicator3, io.getSize(), format, io.getLinearKey(), 0, itsRGB16, hashedpass);
                                         time.Stop();
-                                        MessageBox.Show(string.Format("File Embeded Successfully!!\nTime Elapsed: {0}", time.Elapsed), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        TimeSpan span = time.Elapsed;
+                                        string ElapsedTime = "The Time Elapsed is ";
+                                        if (span.Hours > 0)
+                                        {
+                                            ElapsedTime += span.Hours + " hours ";
+                                        }
+                                        if (span.Minutes > 0)
+                                        {
+                                            ElapsedTime += span.Minutes + " minutes ";
+                                        }
+                                        if (span.Seconds > 0)
+                                        {
+                                            ElapsedTime += span.Seconds + " seconds ";
+                                        }
+                                        ElapsedTime += span.Milliseconds + " milliseconds";
+                                        MessageBox.Show(string.Format("File Embeded Successfully!!\n{0}", ElapsedTime), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                         if (deleteAfterEmbeddingToolStripMenuItem.Checked)
                                         {
                                             if (fileList.Count != 0)
@@ -380,11 +436,11 @@ namespace CuttleFish
                                                 File.Delete(txtPath.Text);
                                             }
                                         }
-                                        
+                                        resetClasses();
                                     }
                                     catch (Exception ErrorMessage)
                                     {
-                                        MessageBox.Show(string.Format("Encountered an exception while embedding file.\n{0} ", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        MessageBox.Show(string.Format("Opps! We encountered an error while embedding. Please check if the payload file or video file exist and not used by another program and restart the operation. \n\n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
                                     txtPath.Text = "";
                                     vidPath.Text = "";
@@ -405,7 +461,22 @@ namespace CuttleFish
                                 {
                                     await vidreader.ReadAndEmbedVideoStream(vidPath.Text, io.getData(), dataProgressIndicator3, io.getSize(), format, io.getLinearKey(), 0, itsRGB16);
                                     time.Stop();
-                                    MessageBox.Show(string.Format("File Embeded Successfully!!\nTime Elapsed: {0}", time.Elapsed), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    TimeSpan span = time.Elapsed;
+                                    string ElapsedTime = "The Time Elapsed is ";
+                                    if (span.Hours > 0)
+                                    {
+                                        ElapsedTime += span.Hours + " hours ";
+                                    }
+                                    if (span.Minutes > 0)
+                                    {
+                                        ElapsedTime += span.Minutes + " minutes ";
+                                    }
+                                    if (span.Seconds > 0)
+                                    {
+                                        ElapsedTime += span.Seconds + " seconds ";
+                                    }
+                                    ElapsedTime += span.Milliseconds + " milliseconds";
+                                    MessageBox.Show(string.Format("File Embeded Successfully!!\n{0}", ElapsedTime), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     if (deleteAfterEmbeddingToolStripMenuItem.Checked)
                                     {
                                         if (fileList.Count != 0)
@@ -421,11 +492,11 @@ namespace CuttleFish
                                             File.Delete(txtPath.Text);
                                         }
                                     }
-
+                                    resetClasses();
                                 }
                                 catch (Exception ErrorMessage)
                                 {
-                                    MessageBox.Show(string.Format("Encountered an exception while embedding file.\n{0} ", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show(string.Format("Opps! We encountered an error while embedding. Please check if the payload file or video file exist and not used by another program and restart the operation. \n\n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                                 txtPath.Text = "";
                                 vidPath.Text = "";
@@ -436,18 +507,18 @@ namespace CuttleFish
 
                     else
                     {
-                        MessageBox.Show("Cannot embed data, selected video cover can only hold " + displayFileSize((vidreader.getVideoStreamSize() / 4)) + "bytes or less", "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Opps! we cannot embed the size bigger than the capacity of the video cover. Please use payload withe the size of {0} " + vSize.Text + " or less", "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Unsupported Video Codec! \nThe Codec used in the video cover file is currently not supported by this system. \nCurrently only codecless RGB 24 bit is supported", "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Unsupported Video Codec \nThe Codec used in the video cover file is currently not supported by this system. \nPlease use a supported codec", "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
             else if(formNotFilledUp)
             {
-                MessageBox.Show("Missing input found. Fill up the neccessary inputs", "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please fill up the neccessary inputs", "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else if (metaCleanErrorFlag)
             {
@@ -456,8 +527,7 @@ namespace CuttleFish
             }
             deleteAfterEmbeddingToolStripMenuItem.Enabled = true;
             sReportLbl.Text = "Ready";
-        }
-
+         }
         private async void button1_Click(object sender, EventArgs e)
         {
             removeMetadata = false;
@@ -598,7 +668,7 @@ namespace CuttleFish
                     groupBox12.Visible = false;
                     SaveLocationBtn.Enabled = false;
                     sha256 = null;
-                    MessageBox.Show("Found no embedded file on selected Video Cover", "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("We found no embedded file on selected Video Cover. Please select a video cover with a payload inside", "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
                 savePath.Text = "";
@@ -612,7 +682,16 @@ namespace CuttleFish
         {
             eSize.Text = displayFileSize(size);
         }
-
+        private void resetClasses()
+        {
+            vidreader = null;
+            io = null;
+            GC.Collect(0, GCCollectionMode.Forced);
+            GC.Collect(1, GCCollectionMode.Forced);
+            GC.Collect(2, GCCollectionMode.Forced);
+            vidreader = new AVIFileREader();
+            io = new FileIO();
+        }
         private void SaveLocationBtn_Click(object sender, EventArgs e)
         {
             SaveFileDialog diag = new SaveFileDialog();
@@ -630,15 +709,14 @@ namespace CuttleFish
             embededSize = vidreader.getESize();
             bool frmNotFilled = false;
             ErrProvide.Clear();
-            SaveLocationBtn.Enabled = false;
             if (vCoverPath.Text == "")
             {
-                ErrProvide.SetError(vCoverPath, "Select a Video Cover");
+                ErrProvide.SetError(vCoverPath, "Please select a video cover");
                 frmNotFilled = true;
             }
             if (savePath.Text == "")
             {
-                ErrProvide.SetError(savePath, "Provide a Save Location for the Extracted File");
+                ErrProvide.SetError(savePath, "Please provide a save location for the extracted file");
                 frmNotFilled = true;
             }
             if (!frmNotFilled)
@@ -671,8 +749,8 @@ namespace CuttleFish
             }
             else
             {
-                MessageBox.Show("Missing input found. Fill up the neccessary inputs", "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                SaveLocationBtn.Enabled = false;
+                MessageBox.Show("Please fill up the necessary inputs", "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                
             }
 
         }
@@ -707,11 +785,12 @@ namespace CuttleFish
                 await vidreader.RemoveMetadata(vCoverPath.Text);
                 sReportLbl.Text = "Ready";
                 time.Stop();
-                MessageBox.Show("Exctracted File Saved. \nPath: " + savePath.Text + "\nTime Elapsed: " + time.Elapsed, "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+                MessageBox.Show("Exctracted File save at " + savePath.Text + "\nTime Elapsed: " + time.Elapsed, "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                resetClasses();
+           }
             catch (Exception ErrorMessage)
             {
-                MessageBox.Show(string.Format("Encountered an exception while extracting file.\n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format("Opps! We encountered an error while extracting. Please check if the video file exist and not used by another program and restart the operation. \n\n{0}", ErrorMessage.Message), "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             vCoverPath.Text = "";
             savePath.Text = "";
@@ -747,7 +826,7 @@ namespace CuttleFish
             await vidreader.RemoveMetadata(vCoverPath.Text);
             sReportLbl.Text = "Ready";
             time.Stop();
-            MessageBox.Show("Exctracted File Saved. \nPath: " + savePath.Text + "\nTime Elapsed: " + time.Elapsed, "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Exctracted file saved at " + savePath.Text + "\nTime Elapsed: " + time.Elapsed, "Cuttlefish", MessageBoxButtons.OK, MessageBoxIcon.Information);
             vCoverPath.Text = "";
             savePath.Text = "";
             SaveLocationBtn.Enabled = false;
@@ -775,14 +854,14 @@ namespace CuttleFish
             if (extractedDataRepored == vidreader.embedsize2)
             {
                 progBar.Value = 0;
-                sReportLbl.Text = "Decrypting and Saving File.... ";
+                sReportLbl.Text = "Decoding and Saving File.... ";
             }
         }
         private void reportWroteData(long wroteDataReported)
         {
             progBar.Minimum = 0;
             progBar.Maximum = 100;
-            sReportLbl.Text = "Decrypting and Saving File.... " + wroteDataReported + " bytes out of " + vidreader.embedsize2 + " bytes";
+            sReportLbl.Text = "Decoding and Saving File.... " + wroteDataReported + " bytes out of " + vidreader.embedsize2 + " bytes";
             double a = (embededSize / (double)100);
             int b = (int)(wroteDataReported / a);
 

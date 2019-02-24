@@ -26,6 +26,7 @@ namespace CuttleFish
             {
                 while(Size > 0)
                 {
+                    Chunk = null;
                     if (Size < chunk100MB)
                     {
                         Chunk = new byte[Size];
