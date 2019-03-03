@@ -63,6 +63,26 @@ namespace CuttleFish.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cuttlefish {
+            get {
+                object obj = ResourceManager.GetObject("cuttlefish", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cuttlefish1 {
+            get {
+                object obj = ResourceManager.GetObject("cuttlefish1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CuttlefishBinary {
             get {
                 object obj = ResourceManager.GetObject("CuttlefishBinary", resourceCulture);

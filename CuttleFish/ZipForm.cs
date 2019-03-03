@@ -20,7 +20,6 @@ namespace CuttleFish
         {
             InitializeComponent();
         }
-
         private void ZipForm_Load(object sender, EventArgs e)
         {
             compressFile.Enabled = false;
@@ -258,7 +257,7 @@ namespace CuttleFish
             }
             else if (e.Error != null)
             {
-                MessageBox.Show("Opps, Encountered an error when compressing file. Please check if the file selected is used by another program. \n\n" + e.Error, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Opps, Encountered an error when compressing file. Please check if the file selected is used by another program or the computer hard drive space.. \n\n" + e.Error.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {

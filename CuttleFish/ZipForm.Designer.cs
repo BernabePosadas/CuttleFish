@@ -36,9 +36,9 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.compressionSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zipCompressionModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optimalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fastestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.noCompressionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optimalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FileList = new System.Windows.Forms.ListBox();
             this.Add = new System.Windows.Forms.Button();
             this.RemoveFromList = new System.Windows.Forms.Button();
@@ -109,6 +109,13 @@
             this.zipCompressionModeToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.zipCompressionModeToolStripMenuItem.Text = "Zip Compression Mode";
             // 
+            // optimalToolStripMenuItem
+            // 
+            this.optimalToolStripMenuItem.Name = "optimalToolStripMenuItem";
+            this.optimalToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.optimalToolStripMenuItem.Text = "Optimal";
+            this.optimalToolStripMenuItem.Click += new System.EventHandler(this.optimalToolStripMenuItem_Click);
+            // 
             // fastestToolStripMenuItem
             // 
             this.fastestToolStripMenuItem.Name = "fastestToolStripMenuItem";
@@ -122,13 +129,6 @@
             this.noCompressionToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.noCompressionToolStripMenuItem.Text = "No Compression";
             this.noCompressionToolStripMenuItem.Click += new System.EventHandler(this.noCompressionToolStripMenuItem_Click);
-            // 
-            // optimalToolStripMenuItem
-            // 
-            this.optimalToolStripMenuItem.Name = "optimalToolStripMenuItem";
-            this.optimalToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.optimalToolStripMenuItem.Text = "Optimal";
-            this.optimalToolStripMenuItem.Click += new System.EventHandler(this.optimalToolStripMenuItem_Click);
             // 
             // FileList
             // 

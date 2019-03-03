@@ -807,13 +807,12 @@ namespace CuttleFish
             }
             readVid.Dispose(); 
         }
-        public bool checkForEmbeddedFile(string path)
+        public bool checkForEmbeddedFile(string path, IProgress<int> EmbededFileSize, IProgress<string> extenstion)
         {
             ErrorEncountered = false;
             FileStream readVid = new FileStream(path, FileMode.Open, FileAccess.Read);
             using (readVid)
             {
-                resetInfoExceptvSize();
                 int fID = 4;
                 long seekOffset = 8;
                 readVid.Seek(seekOffset, SeekOrigin.Begin);
@@ -935,7 +934,9 @@ namespace CuttleFish
                                     byte[] ext = new byte[extSize];
                                     readVid.Read(ext, 0, extSize);
                                     seekOffset += extSize;
+                                    extenstion.Report(ASCIIEncoding.ASCII.GetString(ext));
                                     readVid.Read(fourcc, 0, 4);
+                                    EmbededFileSize.Report(getEquivalentDecimalNoAdd1(fourcc));
                                     eSize = getEquivalentDecimalNoAdd1(fourcc);
                                     seekOffset += 4;
                                     readVid.Read(keystreamdata, 0, keystreamdata.Length);
@@ -967,10 +968,6 @@ namespace CuttleFish
                         else
                         {
                             break;
-                        }
-                        if (hops % 500 == 0)
-                        {
-
                         }
                     }
                 }

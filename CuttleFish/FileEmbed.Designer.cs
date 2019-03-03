@@ -92,7 +92,6 @@
             this.vCoverPath = new System.Windows.Forms.TextBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.ErrProvide = new System.Windows.Forms.ErrorProvider(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteSourceFileAfterEmbeddingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -107,6 +106,8 @@
             this.bitfastToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bitslowerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAltF4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bgAppendor = new System.ComponentModel.BackgroundWorker();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.statusStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -122,8 +123,8 @@
             this.groupBox9.SuspendLayout();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ErrProvide)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -192,7 +193,9 @@
             // 
             // sReportLbl
             // 
+            this.sReportLbl.BackColor = System.Drawing.Color.White;
             this.sReportLbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sReportLbl.ForeColor = System.Drawing.SystemColors.ControlText;
             this.sReportLbl.Name = "sReportLbl";
             this.sReportLbl.Size = new System.Drawing.Size(53, 21);
             this.sReportLbl.Text = "Ready";
@@ -420,12 +423,12 @@
             this.tabControl1.Controls.Add(this.Embed);
             this.tabControl1.Controls.Add(this.Extract);
             this.tabControl1.ImageList = this.imageList1;
-            this.tabControl1.Location = new System.Drawing.Point(10, 125);
+            this.tabControl1.Location = new System.Drawing.Point(0, 125);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(5, 5);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(826, 383);
+            this.tabControl1.Size = new System.Drawing.Size(836, 383);
             this.tabControl1.TabIndex = 8;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -441,7 +444,7 @@
             this.Embed.Location = new System.Drawing.Point(4, 61);
             this.Embed.Name = "Embed";
             this.Embed.Padding = new System.Windows.Forms.Padding(3);
-            this.Embed.Size = new System.Drawing.Size(818, 318);
+            this.Embed.Size = new System.Drawing.Size(828, 318);
             this.Embed.TabIndex = 0;
             // 
             // groupBox3
@@ -545,7 +548,7 @@
             this.Extract.Location = new System.Drawing.Point(4, 61);
             this.Extract.Name = "Extract";
             this.Extract.Padding = new System.Windows.Forms.Padding(3);
-            this.Extract.Size = new System.Drawing.Size(818, 318);
+            this.Extract.Size = new System.Drawing.Size(828, 318);
             this.Extract.TabIndex = 1;
             // 
             // groupBox12
@@ -752,20 +755,6 @@
             // 
             this.ErrProvide.ContainerControl = this;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ErrProvide.SetIconAlignment(this.pictureBox1, System.Windows.Forms.ErrorIconAlignment.TopLeft);
-            this.pictureBox1.Image = global::CuttleFish.Properties.Resources.CuttlefishBinary;
-            this.pictureBox1.Location = new System.Drawing.Point(585, 5);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(245, 175);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 9;
-            this.pictureBox1.TabStop = false;
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -882,12 +871,35 @@
             this.closeAltF4ToolStripMenuItem.Text = "Close                 Alt + F4";
             this.closeAltF4ToolStripMenuItem.Click += new System.EventHandler(this.closeAltF4ToolStripMenuItem_Click);
             // 
+            // bgAppendor
+            // 
+            this.bgAppendor.WorkerReportsProgress = true;
+            this.bgAppendor.WorkerSupportsCancellation = true;
+            this.bgAppendor.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgAppendor_DoWork);
+            this.bgAppendor.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgAppendor_ProgressChanged);
+            this.bgAppendor.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgAppendor_RunWorkerCompleted);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ErrProvide.SetIconAlignment(this.pictureBox1, System.Windows.Forms.ErrorIconAlignment.TopLeft);
+            this.pictureBox1.Image = global::CuttleFish.Properties.Resources.CuttlefishBinary;
+            this.pictureBox1.Location = new System.Drawing.Point(615, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(217, 168);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
+            // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::CuttleFish.Properties.Resources.CuttleFishName1;
-            this.pictureBox2.Location = new System.Drawing.Point(9, 27);
+            this.pictureBox2.BackColor = System.Drawing.Color.Silver;
+            this.pictureBox2.Image = global::CuttleFish.Properties.Resources.cuttlefish1;
+            this.pictureBox2.Location = new System.Drawing.Point(0, 27);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(450, 93);
+            this.pictureBox2.Size = new System.Drawing.Size(593, 92);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 10;
             this.pictureBox2.TabStop = false;
@@ -898,8 +910,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(839, 537);
-            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -936,9 +948,9 @@
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ErrProvide)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -997,7 +1009,6 @@
         private System.Windows.Forms.ErrorProvider ErrProvide;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteSourceFileAfterEmbeddingToolStripMenuItem;
@@ -1025,6 +1036,8 @@
         private System.Windows.Forms.Label lblSorceFileDelete;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label14;
+        private System.ComponentModel.BackgroundWorker bgAppendor;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 
