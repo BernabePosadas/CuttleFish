@@ -109,6 +109,7 @@
             this.bgAppendor = new System.ComponentModel.BackgroundWorker();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.aboutCuttlefishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -428,7 +429,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(5, 5);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(836, 383);
+            this.tabControl1.Size = new System.Drawing.Size(839, 383);
             this.tabControl1.TabIndex = 8;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -441,10 +442,10 @@
             this.Embed.Controls.Add(this.groupBox4);
             this.Embed.Controls.Add(this.groupBox1);
             this.Embed.ImageKey = "Embed.png";
-            this.Embed.Location = new System.Drawing.Point(4, 61);
+            this.Embed.Location = new System.Drawing.Point(4, 71);
             this.Embed.Name = "Embed";
             this.Embed.Padding = new System.Windows.Forms.Padding(3);
-            this.Embed.Size = new System.Drawing.Size(828, 318);
+            this.Embed.Size = new System.Drawing.Size(831, 308);
             this.Embed.TabIndex = 0;
             // 
             // groupBox3
@@ -545,10 +546,10 @@
             this.Extract.Controls.Add(this.BeginExtraction);
             this.Extract.Controls.Add(this.groupBox7);
             this.Extract.ImageIndex = 1;
-            this.Extract.Location = new System.Drawing.Point(4, 61);
+            this.Extract.Location = new System.Drawing.Point(4, 71);
             this.Extract.Name = "Extract";
             this.Extract.Padding = new System.Windows.Forms.Padding(3);
-            this.Extract.Size = new System.Drawing.Size(828, 318);
+            this.Extract.Size = new System.Drawing.Size(831, 308);
             this.Extract.TabIndex = 1;
             // 
             // groupBox12
@@ -761,7 +762,7 @@
             this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(839, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(839, 29);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -772,9 +773,11 @@
             this.deleteSourceFileAfterEmbeddingToolStripMenuItem,
             this.securityToolStripMenuItem,
             this.encryptionToolStripMenuItem,
+            this.aboutCuttlefishToolStripMenuItem,
             this.closeAltF4ToolStripMenuItem});
+            this.settingsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(78, 25);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // deleteSourceFileAfterEmbeddingToolStripMenuItem
@@ -785,34 +788,34 @@
             this.singleFileToolStripMenuItem,
             this.multipleFileModeToolStripMenuItem});
             this.deleteSourceFileAfterEmbeddingToolStripMenuItem.Name = "deleteSourceFileAfterEmbeddingToolStripMenuItem";
-            this.deleteSourceFileAfterEmbeddingToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.deleteSourceFileAfterEmbeddingToolStripMenuItem.Size = new System.Drawing.Size(264, 26);
             this.deleteSourceFileAfterEmbeddingToolStripMenuItem.Text = "Payload file";
             // 
             // deleteAfterEmbeddingToolStripMenuItem
             // 
             this.deleteAfterEmbeddingToolStripMenuItem.Name = "deleteAfterEmbeddingToolStripMenuItem";
-            this.deleteAfterEmbeddingToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.deleteAfterEmbeddingToolStripMenuItem.Size = new System.Drawing.Size(324, 26);
             this.deleteAfterEmbeddingToolStripMenuItem.Text = "Delete source file after embedding";
             this.deleteAfterEmbeddingToolStripMenuItem.Click += new System.EventHandler(this.deleteAfterEmbeddingToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(257, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(321, 6);
             // 
             // singleFileToolStripMenuItem
             // 
             this.singleFileToolStripMenuItem.Checked = true;
             this.singleFileToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.singleFileToolStripMenuItem.Name = "singleFileToolStripMenuItem";
-            this.singleFileToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.singleFileToolStripMenuItem.Size = new System.Drawing.Size(324, 26);
             this.singleFileToolStripMenuItem.Text = "Single File Only";
             this.singleFileToolStripMenuItem.Click += new System.EventHandler(this.singleFileToolStripMenuItem_Click);
             // 
             // multipleFileModeToolStripMenuItem
             // 
             this.multipleFileModeToolStripMenuItem.Name = "multipleFileModeToolStripMenuItem";
-            this.multipleFileModeToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.multipleFileModeToolStripMenuItem.Size = new System.Drawing.Size(324, 26);
             this.multipleFileModeToolStripMenuItem.Text = "Multiple Files(Compress to Zip File)";
             this.multipleFileModeToolStripMenuItem.Click += new System.EventHandler(this.multipleFileModeToolStripMenuItem_Click);
             // 
@@ -821,14 +824,14 @@
             this.securityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.requireAPasswordToolStripMenuItem});
             this.securityToolStripMenuItem.Name = "securityToolStripMenuItem";
-            this.securityToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.securityToolStripMenuItem.Size = new System.Drawing.Size(264, 26);
             this.securityToolStripMenuItem.Text = "Embedding";
             // 
             // requireAPasswordToolStripMenuItem
             // 
             this.requireAPasswordToolStripMenuItem.Name = "requireAPasswordToolStripMenuItem";
-            this.requireAPasswordToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.requireAPasswordToolStripMenuItem.Text = "Require a Password";
+            this.requireAPasswordToolStripMenuItem.Size = new System.Drawing.Size(248, 26);
+            this.requireAPasswordToolStripMenuItem.Text = "Set Password Protection";
             this.requireAPasswordToolStripMenuItem.Click += new System.EventHandler(this.requireAPasswordToolStripMenuItem_Click_1);
             // 
             // encryptionToolStripMenuItem
@@ -836,7 +839,7 @@
             this.encryptionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.keySizeToolStripMenuItem});
             this.encryptionToolStripMenuItem.Name = "encryptionToolStripMenuItem";
-            this.encryptionToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.encryptionToolStripMenuItem.Size = new System.Drawing.Size(264, 26);
             this.encryptionToolStripMenuItem.Text = "Encoding(Data Encryption)";
             // 
             // keySizeToolStripMenuItem
@@ -845,7 +848,7 @@
             this.bitfastToolStripMenuItem,
             this.bitslowerToolStripMenuItem});
             this.keySizeToolStripMenuItem.Name = "keySizeToolStripMenuItem";
-            this.keySizeToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.keySizeToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
             this.keySizeToolStripMenuItem.Text = "Key Size";
             // 
             // bitfastToolStripMenuItem
@@ -853,21 +856,21 @@
             this.bitfastToolStripMenuItem.Checked = true;
             this.bitfastToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.bitfastToolStripMenuItem.Name = "bitfastToolStripMenuItem";
-            this.bitfastToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.bitfastToolStripMenuItem.Size = new System.Drawing.Size(185, 26);
             this.bitfastToolStripMenuItem.Text = "16 bit(fast)";
             this.bitfastToolStripMenuItem.Click += new System.EventHandler(this.bitfastToolStripMenuItem_Click);
             // 
             // bitslowerToolStripMenuItem
             // 
             this.bitslowerToolStripMenuItem.Name = "bitslowerToolStripMenuItem";
-            this.bitslowerToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.bitslowerToolStripMenuItem.Size = new System.Drawing.Size(185, 26);
             this.bitslowerToolStripMenuItem.Text = "128 bit(slower)";
             this.bitslowerToolStripMenuItem.Click += new System.EventHandler(this.bitslowerToolStripMenuItem_Click);
             // 
             // closeAltF4ToolStripMenuItem
             // 
             this.closeAltF4ToolStripMenuItem.Name = "closeAltF4ToolStripMenuItem";
-            this.closeAltF4ToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.closeAltF4ToolStripMenuItem.Size = new System.Drawing.Size(264, 26);
             this.closeAltF4ToolStripMenuItem.Text = "Close                 Alt + F4";
             this.closeAltF4ToolStripMenuItem.Click += new System.EventHandler(this.closeAltF4ToolStripMenuItem_Click);
             // 
@@ -886,23 +889,30 @@
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ErrProvide.SetIconAlignment(this.pictureBox1, System.Windows.Forms.ErrorIconAlignment.TopLeft);
             this.pictureBox1.Image = global::CuttleFish.Properties.Resources.CuttlefishBinary;
-            this.pictureBox1.Location = new System.Drawing.Point(615, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(606, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(217, 168);
+            this.pictureBox1.Size = new System.Drawing.Size(221, 167);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Silver;
-            this.pictureBox2.Image = global::CuttleFish.Properties.Resources.cuttlefish1;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 27);
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.Image = global::CuttleFish.Properties.Resources.CuttleFishName1;
+            this.pictureBox2.Location = new System.Drawing.Point(4, 32);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(593, 92);
+            this.pictureBox2.Size = new System.Drawing.Size(523, 87);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 10;
             this.pictureBox2.TabStop = false;
+            // 
+            // aboutCuttlefishToolStripMenuItem
+            // 
+            this.aboutCuttlefishToolStripMenuItem.Name = "aboutCuttlefishToolStripMenuItem";
+            this.aboutCuttlefishToolStripMenuItem.Size = new System.Drawing.Size(264, 26);
+            this.aboutCuttlefishToolStripMenuItem.Text = "About Cuttlefish";
+            this.aboutCuttlefishToolStripMenuItem.Click += new System.EventHandler(this.aboutCuttlefishToolStripMenuItem_Click);
             // 
             // FileEmbed
             // 
@@ -1038,6 +1048,7 @@
         private System.Windows.Forms.Label label14;
         private System.ComponentModel.BackgroundWorker bgAppendor;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.ToolStripMenuItem aboutCuttlefishToolStripMenuItem;
     }
 }
 

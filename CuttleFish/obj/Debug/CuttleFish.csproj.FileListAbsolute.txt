@@ -9,3 +9,4 @@ C:\Users\SU# BERNABE\Documents\Visual Studio 2012\Projects\CuttleFishv0.0.8\Cutt
 C:\Users\SU# BERNABE\Documents\Visual Studio 2012\Projects\CuttleFishv0.0.8\CuttleFish\CuttleFish\obj\Debug\CuttleFish.SetPasswordPasswordPopUp.resources
 C:\Users\SU# BERNABE\Documents\Visual Studio 2012\Projects\CuttleFishv0.0.8\CuttleFish\CuttleFish\obj\Debug\CuttleFish.ZipForm.resources
 C:\Users\SU# BERNABE\Documents\Visual Studio 2012\Projects\CuttleFishv0.0.8\CuttleFish\CuttleFish\obj\Debug\CuttleFish.csproj.GenerateResource.Cache
+C:\Users\SU# BERNABE\Documents\Visual Studio 2012\Projects\CuttleFishv0.0.8\CuttleFish\CuttleFish\obj\Debug\CuttleFish.AboutBox1.resources

@@ -771,6 +771,7 @@ namespace CuttleFish
                                         Supportedlbl.Text = "";
                                         vFilename.Text = "";
                                         vidPath.Text = "";
+                                        reEnterPassword = false;
                                     }
                                 }
                             }
@@ -1385,10 +1386,16 @@ namespace CuttleFish
                             e.Cancel = true;
                             break;
                         }
+                        else if (i == 0)
+                        {
+
+                            zipper.CreateEntryFromFile(AppDataPath + extension.Text, "Extracted From " + Path.GetFileName(vidPath.Text) + Path.GetExtension(AppDataPath + extension.Text), CompressionLevel.Optimal);
+                            System.Threading.Thread.Sleep(100);
+                            worker.ReportProgress(i + 2);
+                        }
                         else
                         {
                             zipper.CreateEntryFromFile(fileList[i], Path.GetFileName(fileList[i]), CompressionLevel.Optimal);
-                            zipper.CreateEntryFromFile(AppDataPath + extension.Text, "Extracted From " + Path.GetFileName(vidPath.Text) + Path.GetExtension(AppDataPath + extension.Text), CompressionLevel.Optimal);
                             System.Threading.Thread.Sleep(100);
                             worker.ReportProgress(i + 2);
                         }
@@ -1456,6 +1463,12 @@ namespace CuttleFish
                     
                 }
             }
+        }
+
+        private void aboutCuttlefishToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox1 abt = new AboutBox1();
+            abt.Show();
         }
 
     }
