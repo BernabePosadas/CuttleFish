@@ -1,6 +1,6 @@
 language : csharp
 os: windows
-solution: CuttleFish.sln
+solution: CuttleFish\CuttleFish.sln
 mono:
   - latest
   - 3.12.0
