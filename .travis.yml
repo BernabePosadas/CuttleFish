@@ -1,5 +1,4 @@
 language : csharp
-os: windows
 solution: CuttleFish\CuttleFish.sln
 mono:
   - latest
