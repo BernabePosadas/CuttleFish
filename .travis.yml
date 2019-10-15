@@ -3,7 +3,7 @@ os:
 - windows
 - linux
 - osx
-solution: ./CuttleFish/CuttleFish.sln
+solution: CuttleFish.sln
 mono:
   - latest
   - none
