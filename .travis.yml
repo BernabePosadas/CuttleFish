@@ -1,9 +1,0 @@
-language : csharp
-os: 
-- windows
-- linux
-- osx
-solution: CuttleFish.sln
-mono:
-  - latest
-  - none
